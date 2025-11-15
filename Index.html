@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nós dois 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #222;
+      background: radial-gradient(circle at top, #ffe0f0, #f3f5ff 45%, #fefefe);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 26px 24px 22px;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 460px;
+      text-align: center;
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+    }
+
+    .title {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      color: #777;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    .photo-wrapper {
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      border: 2px solid rgba(255, 150, 180, 0.45);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      display: block;
+    }
+
+    .message {
+      color: #444;
+      margin-bottom: 20px;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #ff4d88;
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 0.78rem;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
+    /* PLAYER DE VÍDEO */
+    .video-box {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 10px;
+      background: #000;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      outline: none;
+      border: none;
+    }
+
+    .footer {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 22px 18px 18px;
+        border-radius: 22px;
+      }
+
+      .title {
+        font-size: 1.6rem;
+      }
+
+      .subtitle {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="title">Eu & Você</div>
+    <div class="subtitle">Um cantinho só nosso 💫</div>
+
+    <div class="photo-wrapper">
+      <!-- Troque pelo nome do arquivo da foto -->
+      <img src="foto-casal.jpg" alt="Foto do casal">
+    </div>
+
+    <p class="message">
+      Desde que você chegou, tudo ficou mais leve, mais bonito e mais
+      <span class="highlight">nosso</span>.<br>
+      Esse cantinho é só para lembrar que o amor mora aqui. 💖
+    </p>
+
+    <p class="hint">(Se o som não tocar, é só clicar em qualquer lugar da página 💕)</p>
+
+    <!-- VÍDEO LOCAL COM AUTOPLAY -->
+    <div class="video-box">
+      <video id="video" autoplay muted playsinline controls>
+        <!-- Troque "video.mp4" pelo nome exato do seu arquivo -->
+        <source src="video.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+    </div>
+
+    <div class="footer">
+      Feito com ❤️ só para você
+    </div>
+  </div>
+
+  <script>
+    // No primeiro clique na página, liga o som do vídeo
+    window.addEventListener("click", function () {
+      const video = document.getElementById("video");
+      if (video) {
+        video.muted = false;
+        video.volume = 1.0;
+      }
+    }, { once: true });
+  </script>
+</body>
+</html>
