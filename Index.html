@@ -26,6 +26,8 @@
       padding: 20px;
       color: #222;
       background: radial-gradient(circle at top, #ffe0f0, #f3f5ff 45%, #fefefe);
+      position: relative;
+      overflow-x: hidden;
     }
 
     .card {
@@ -35,20 +37,40 @@
       width: 100%;
       max-width: 460px;
       text-align: center;
-      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.14);
       overflow: hidden;
+      position: relative;
+    }
+
+    /* borda com degradê suave */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #ff8fc0, #ffc7df, #ffeef7);
+      z-index: -2;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: inherit;
+      backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.92);
+      z-index: -1;
     }
 
     .title {
       font-size: 1.9rem;
       font-weight: 600;
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
+      margin-bottom: 4px;
     }
 
     .subtitle {
       color: #777;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       font-size: 0.95rem;
     }
 
@@ -56,20 +78,26 @@
       border-radius: 22px;
       overflow: hidden;
       margin-bottom: 18px;
-      border: 2px solid rgba(255, 150, 180, 0.45);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+      border: 2px solid rgba(255, 150, 180, 0.6);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
     }
 
     .photo-wrapper img {
       width: 100%;
       display: block;
+      transform: scale(1.03);
+      transition: transform 0.4s ease;
+    }
+
+    .photo-wrapper:hover img {
+      transform: scale(1.08);
     }
 
     .message {
       color: #444;
-      margin-bottom: 20px;
-      font-size: 0.98rem;
-      line-height: 1.6;
+      margin-bottom: 18px;
+      font-size: 1rem;
+      line-height: 1.7;
     }
 
     .highlight {
@@ -83,20 +111,17 @@
       margin-bottom: 6px;
     }
 
-    /* PLAYER DE VÍDEO */
     .video-box {
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      margin-bottom: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+      margin-bottom: 12px;
       background: #000;
     }
 
     video {
       width: 100%;
       display: block;
-      outline: none;
-      border: none;
     }
 
     .footer {
@@ -105,20 +130,6 @@
       font-size: 0.85rem;
     }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 22px 18px 18px;
-        border-radius: 22px;
-      }
-
-      .title {
-        font-size: 1.6rem;
-      }
-
-      .subtitle {
-        font-size: 0.9rem;
-      }
-    }
   </style>
 </head>
 
@@ -128,7 +139,6 @@
     <div class="subtitle">Um cantinho só nosso 💫</div>
 
     <div class="photo-wrapper">
-      <!-- Troque pelo nome do arquivo da foto -->
       <img src="foto-casal.jpg" alt="Foto do casal">
     </div>
 
@@ -138,14 +148,20 @@
       Esse cantinho é só para lembrar que o amor mora aqui. 💖
     </p>
 
-    <p class="hint">(Se o som não tocar, é só clicar em qualquer lugar da página 💕)</p>
+    <p class="hint">(Se o som não tocar, toque na tela uma vez 💕)</p>
 
-    <!-- VÍDEO LOCAL COM AUTOPLAY -->
+    <!-- VÍDEO COMPATÍVEL COM ANDROID + IPHONE -->
     <div class="video-box">
-      <video id="video" autoplay muted playsinline controls>
-        <!-- Troque "video.mp4" pelo nome exato do seu arquivo -->
+      <video id="video"
+             autoplay
+             muted
+             playsinline
+             webkit-playsinline
+             x5-playsinline
+             controls
+             preload="auto">
+
         <source src="video.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo.
       </video>
     </div>
 
@@ -155,14 +171,17 @@
   </div>
 
   <script>
-    // No primeiro clique na página, liga o som do vídeo
-    window.addEventListener("click", function () {
+    // Liga o som no primeiro toque (obrigatório nas regras do iPhone)
+    window.addEventListener("touchstart", liberarSom, { once: true });
+    window.addEventListener("click", liberarSom, { once: true });
+
+    function liberarSom() {
       const video = document.getElementById("video");
       if (video) {
         video.muted = false;
         video.volume = 1.0;
       }
-    }, { once: true });
+    }
   </script>
 </body>
 </html>
